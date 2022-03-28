@@ -45,7 +45,7 @@ func (linkedList LinkedList) findMiddle() *node {
 
 	slow := head
 	fast := head
-	for slow != nil && fast != nil && fast.next != nil {
+	for  fast != nil && fast.next != nil {
 		slow = slow.next
 		fast = fast.next.next
 	}
@@ -60,7 +60,7 @@ func (linkedList LinkedList) findCycle() *node {
 	slow := head
 	fast := head
 
-	for fast != nil && fast.next != nil {
+	for slow != nil && fast != nil && fast.next != nil {
 
 		slow = slow.next
 		fast = fast.next.next

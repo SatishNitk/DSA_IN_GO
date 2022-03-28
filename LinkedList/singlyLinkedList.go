@@ -4,32 +4,89 @@ import (
 	"fmt"
 )
 
-type Node struct {
+type node struct {
 	data int
-	next *Node
+	next *node
 }
 
-func InsertAtFirst(head *Node, data int) {
-	start := head
-	if start == nil {
-                 head = &Node{data:data}
-		 head.next = nil
+type LinkedList struct {
+	head *node
+}
+
+func (linkedList *LinkedList) insert(data int) {
+	head := linkedList.head
+
+	newNode := &node{data: data}
+	if head == nil {
+		linkedList.head = newNode
 	} else {
+		for head.next != nil {
+
+			head = head.next
+		}
+		head.next = newNode
+	}
+}
+
+func (linkedList LinkedList) display() {
+
+	head := linkedList.head
+
+	for head != nil {
+
+		fmt.Println(head.data)
+		head = head.next
+	}
+}
+
+func (linkedList LinkedList) findMiddle() *node {
+
+	head := linkedList.head
+
+	slow := head
+	fast := head
+	for slow != nil && fast != nil && fast.next != nil {
+		slow = slow.next
+		fast = fast.next.next
+	}
+	return slow
+
+}
+
+func (linkedList LinkedList) findCycle() *node {
+
+	head := linkedList.head
+
+	slow := head
+	fast := head
+
+	for fast != nil && fast.next != nil {
+
+		slow = slow.next
+		fast = fast.next.next
+
+		if slow == fast {
+			return slow
+
+		} else {
+			return nil
+		}
 
 	}
+	return nil
 
 }
 
 func main() {
 
-	var n, data int
-	var Head Node
-	fmt.Println("How many number")
-	fmt.Scanf("%d", &n)
-	for i := 0; i < n; i++ {
-		fmt.Scanf("%d", &data)
-		InsertAtFirst(&Head, 8)
-	}
+	var linkedList LinkedList
 
-	fmt.Println("sa", Head)
+	linkedList.insert(10)
+	linkedList.insert(1320)
+	linkedList.insert(13220)
+	linkedList.insert(101)
+
+	linkedList.display()
+	fmt.Println("Middle Element:- ", linkedList.findMiddle().data) 
+       linkedList.findCycle()
 }

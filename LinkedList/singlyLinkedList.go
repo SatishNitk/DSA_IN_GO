@@ -34,7 +34,7 @@ func (linkedList LinkedList) display() {
 
 	for head != nil {
 
-		fmt.Println(head.data)
+		fmt.Print(head.data, " ")
 		head = head.next
 	}
 }
@@ -45,7 +45,7 @@ func (linkedList LinkedList) findMiddle() *node {
 
 	slow := head
 	fast := head
-	for  fast != nil && fast.next != nil {
+	for fast != nil && fast.next != nil {
 		slow = slow.next
 		fast = fast.next.next
 	}
@@ -77,6 +77,42 @@ func (linkedList LinkedList) findCycle() *node {
 
 }
 
+func reverseLinkedList(head *node) *node {
+
+	var prev, curr, next *node
+
+	prev = nil
+	curr = head
+	for curr != nil {
+		next = curr.next
+		curr.next = prev
+		prev = curr
+		curr = next
+
+	}
+	return prev
+
+}
+
+func printReverseList(head *node) {
+	start := head
+	for start != nil {
+
+		fmt.Println(" ", start.data)
+		start = start.next
+	}
+}
+
+func mergeSortedList(first *node, second *node) *node {
+	if first == nil {
+		return first
+	}
+	if second == nil {
+		return second
+	}
+
+}
+
 func main() {
 
 	var linkedList LinkedList
@@ -87,6 +123,7 @@ func main() {
 	linkedList.insert(101)
 
 	linkedList.display()
-	fmt.Println("Middle Element:- ", linkedList.findMiddle().data) 
-       linkedList.findCycle()
+	fmt.Println("Middle Element:- ", linkedList.findMiddle().data)
+	reverseLinkedList := reverseLinkedList(linkedList.head)
+	printReverseList(reverseLinkedList)
 }
